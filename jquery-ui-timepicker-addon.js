@@ -834,6 +834,8 @@ $.extend(Timepicker.prototype, {
 		//	return;
         //}
 
+        var altFormat = $.datepicker._get(dp_inst, 'altFormat') || $.datepicker._get(dp_inst, 'dateFormat');
+
 		if (this._defaults.timeOnly === true) {
 			formattedDateTime = this.formattedTime;
 		} else if (this._defaults.timeOnly !== true && (this._defaults.alwaysSetTime || timeAvailable)) {
@@ -848,7 +850,7 @@ $.extend(Timepicker.prototype, {
 			this.$altInput.val(this.formattedTime);
 			this.$input.val(this.formattedDate);
 		} else if(this.$altInput) {
-			this.$altInput.val(formattedDateTime);
+			this.$altInput.val($.datepicker.formatDate('yy-mm-dd', (dt === null ? new Date() : dt), formatCfg) + ' ' + this.formattedTime);
 			this.$input.val(formattedDateTime);
 		} else {
 			this.$input.val(formattedDateTime);
